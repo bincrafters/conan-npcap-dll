@@ -2,7 +2,7 @@
 
 [Conan.io](https://conan.io) package for [Npcap](https://github.com/nmap/npcap) project
 
-Note: This package is a component used as a dependency to the complete NPCap package here: 
+Note: This package is for a subproject referred to as dll.  It is a subproject and dependency of the complete NPCap package here: 
 	
 	https://github.com/bincrafters/conan-npcap
 
@@ -12,14 +12,14 @@ The packages generated with this **conanfile** can be found in [conan.io](https:
 
 ## Basic setup
 
-    $ conan install npcap/0.93@bincrafters/testing
+    $ conan install npcap-dll/0.93@bincrafters/testing
 
 ## Project setup
 
 If you handle multiple dependencies in your project is better to add a *conanfile.txt*
 
     [requires]
-    npcap/0.93@bincrafters/testing
+    npcap-dll/0.93@bincrafters/testing
 	
     [generators]
     txt
@@ -41,4 +41,4 @@ Download conan client from [Conan.io](https://conan.io) and run:
 
 ## Upload packages to server
 
-    $ conan upload npcap/0.93@bincrafters/testing --all
+    $ conan upload npcap-dll/0.93@bincrafters/testing --all

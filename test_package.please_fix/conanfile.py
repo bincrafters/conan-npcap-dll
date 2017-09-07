@@ -2,14 +2,11 @@ from conans import ConanFile, CMake
 import os
 
 
-channel = os.getenv("CONAN_CHANNEL", "testing")
-username = os.getenv("CONAN_USERNAME", "bincrafters")
-
-
 class NpcapDllConanTest(ConanFile):
     settings = "compiler", "build_type", "arch"
     generators = "cmake"
-    
+    channel = os.getenv("CONAN_CHANNEL", "testing")
+    username = os.getenv("CONAN_USERNAME", "bincrafters")    
 
     def build(self):
         cmake = CMake(self)
