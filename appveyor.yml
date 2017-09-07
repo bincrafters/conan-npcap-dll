@@ -22,7 +22,7 @@ environment:
           CONAN_VISUAL_VERSIONS: 15
 
 platform:
-  - x86
+  - Win32
   - x64
   
 configuration:
