@@ -14,18 +14,18 @@ class NpcapDllConan(ConanFile):
     options = {
         "configuration": 
             [
-                "OEM Release No NetMon and AirPcap(WinPcap Mode)",
-                "Debug No NetMon and AirPcap(WinPcap Mode)",
+                "Release",
+                "Debug",
+                "Release No NetMon",
+                "Debug No NetMon",
+                "Release No NetMon and AirPcap",
+                "Debug No NetMon and AirPcap",
                 "Release No NetMon and AirPcap(WinPcap Mode)",
+                "Debug No NetMon and AirPcap(WinPcap Mode)",
+                "Release LOG_TO_FILE",
                 "Release No NetMon LOG_TO_FILE",
                 "OEM Release No NetMon and AirPcap",
-                "Debug",
-                "Release",
-                "Debug No NetMon and AirPcap",
-                "Release LOG_TO_FILE",
-                "Debug No NetMon",
-                "Release No NetMon",
-                "Release No NetMon and AirPcap"
+                "OEM Release No NetMon and AirPcap(WinPcap Mode)"
             ] 
     }
 
@@ -37,19 +37,14 @@ class NpcapDllConan(ConanFile):
         self.run(vcvars)
         unzip_dir = "{0}-{1}".format(self.lib_parent_name, self.version)
         sln_path_full = os.path.join(unzip_dir, self.sln_path)
-        
-        #config_full = "\"{0}|{1}\"".format(str(self.options.configuration) , arch_config)
-        print(self.options.configuration)
+
         build_command = tools.msvc_build_command(
             self.settings, 
             sln_path_full,  
             targets=["Build"], 
             upgrade_project=False,
             build_type=str('"' + str(self.options.configuration) + '"'))
-        
-        print (self.settings.arch)
-        print (build_command)
-        print (build_command.replace("x86", "Win32"))
+
         if self.settings.arch == "x86":
             self.run(build_command)
         else:
