@@ -46,9 +46,9 @@ class NpcapDllConan(ConanFile):
             build_type=str('"' + str(self.options.configuration) + '"'))
 
         if self.settings.arch == "x86":
-            self.run(build_command)
+            self.run(build_command.replace('"x86"', '"Win32"'))
         else:
-            self.run(build_command.replace(" x86 ", " Win32 "))
+            self.run(build_command)
         
     def package(self):
         self.copy("*.lib", dst="lib", keep_path=False)
