@@ -7,5 +7,5 @@ if __name__ == "__main__":
     
     for settings, options, env_vars, build_requires in builder.builds:
         if settings["arch"] == "x86":
-             settings.arch = "Win32"
+            settings["arch"] = "Win32"
     builder.run()
