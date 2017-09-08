@@ -34,10 +34,13 @@ class NpcapDllConan(ConanFile):
 
     def build(self):
         vcvars = tools.vcvars_command(self.settings)
-        print(vcvars)
+        print("vcvars = " + vcvars)
         self.run(vcvars)
         unzip_dir = "{0}-{1}".format(self.lib_parent_name, self.version)
         sln_path_full = os.path.join(unzip_dir, self.sln_path)
+        print("sln_path_full = " + sln_path_full)
+
+        print("sln_path_full exists? " + os.path.isfile(fname))
 
         build_command = tools.msvc_build_command(
             self.settings, 
@@ -45,6 +48,8 @@ class NpcapDllConan(ConanFile):
             targets=["Build"], 
             upgrade_project=False,
             build_type=str('"' + str(self.options.configuration) + '"'))
+
+        print(" build_command = " + build_command)
 
         if self.settings.arch == "x86":
             self.run(build_command.replace('"x86"', '"Win32"'))
