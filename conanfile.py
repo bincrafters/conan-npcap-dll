@@ -35,11 +35,10 @@ class NpcapDllConan(ConanFile):
     def build(self):
         unzip_dir = "{0}-{1}".format(self.lib_parent_name, self.version)
         sln_path_full = os.path.join(unzip_dir, self.sln_path)
-        
         build_command = tools.msvc_build_command(
             self.settings, 
             sln_path_full,  
-            targets=["Build"], 
+            targets=["Packet"], 
             upgrade_project=False,
             build_type=str('"' + str(self.options.configuration) + '"'))
 
