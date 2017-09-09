@@ -36,6 +36,7 @@ class NpcapDllConan(ConanFile):
         vcvars = tools.vcvars_command(self.settings)
         print("vcvars = " + vcvars)
         self.run(vcvars)
+        print("never gets here")
         unzip_dir = "{0}-{1}".format(self.lib_parent_name, self.version)
         sln_path_full = os.path.join(unzip_dir, self.sln_path)
         print("sln_path_full = " + sln_path_full)
