@@ -40,7 +40,7 @@ class NpcapDllConan(ConanFile):
         sln_path_full = os.path.join(unzip_dir, self.sln_path)
         print("sln_path_full = " + sln_path_full)
 
-        print("sln_path_full exists? " + os.path.isfile(fname))
+        print("sln_path_full exists? " + str(os.path.isfile(sln_path_full)))
 
         build_command = tools.msvc_build_command(
             self.settings, 
