@@ -15,10 +15,10 @@ class NpcapDllConanTest(ConanFile):
         cmake.build()
 
     def imports(self):
-        self.copy("*.lib", dst="bin", src="bin")
-        self.copy("*.dll", dst="bin", src="bin")
+        self.copy("*.lib", dst="bin", src="lib")
         self.copy("*.dylib*", dst="bin", src="lib")
+        self.copy("*.dll", dst="bin", src="bin")
 
     def test(self):
-        os.chdir("bin")
-        self.run(".{0}example".format(os.sep))
+        pass
+
