@@ -33,8 +33,9 @@ class NpcapDllConan(ConanFile):
         tools.get("{0}/archive/v{1}.zip".format(self.source_url, self.version))
 
     def build(self):
-        #vcvars = tools.vcvars_command(self.settings)
-        #print("vcvars = " + vcvars)
+        vcvars = tools.vcvars_command(self.settings)
+        print("vcvars = " + vcvars.split(" ")[0])
+        print("does vcvarsall.bat exist?  " + os.path.isfile(r'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\../../VC/Auxiliary/Build/vcvarsall.bat') )
         #self.run(vcvars)
         print("never gets here")
         unzip_dir = "{0}-{1}".format(self.lib_parent_name, self.version)
