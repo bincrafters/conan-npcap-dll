@@ -38,10 +38,10 @@ class NpcapDllConan(ConanFile):
         build_command = tools.msvc_build_command(
             self.settings, 
             sln_path_full,  
-            targets=["Packet"], 
-            upgrade_project=False,
             build_type=str('"' + str(self.options.configuration) + '"'))
-
+        
+        print("exists?: " + str(os.path.exists("C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat")))
+        print("build_command: " + build_command)
         if self.settings.arch == "x86":
             self.run(build_command.replace('"x86"', '"Win32"'))
         else:
