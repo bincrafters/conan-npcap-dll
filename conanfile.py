@@ -33,17 +33,22 @@ class NpcapDllConan(ConanFile):
         tools.get("{0}/archive/v{1}.zip".format(self.source_url, self.version))
 
     def build(self):
+        os.environ["VisualStudioVersion"]="" 
+        # Above required to compile for VS14 from VS15
+        # which is currently blocked conan due to a precondition on vcvarsall.bat
+        
         unzip_dir = "{0}-{1}".format(self.lib_parent_name, self.version)
         sln_path_full = os.path.join(unzip_dir, self.sln_path)
         build_command = tools.msvc_build_command(
             self.settings, 
             sln_path_full,  
             build_type=str('"' + str(self.options.configuration) + '"'))
-
+        
         if self.settings.arch == "x86":
             self.run(build_command.replace('"x86"', '"Win32"'))
         else:
             self.run(build_command)
+        
         
     def package(self):
         self.copy("*.lib", dst="lib", keep_path=False)
