@@ -2,7 +2,7 @@ from conans import ConanFile, CMake
 import os
 
 
-class NpcapDllConanTest(ConanFile):
+class TestPackage(ConanFile):
     settings = "compiler", "build_type", "arch"
     generators = "cmake"
     
