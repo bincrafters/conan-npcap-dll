@@ -10,8 +10,9 @@ class NpcapDllConan(ConanFile):
     settings = "arch", "compiler", "build_type"
     lib_parent_name = "npcap"
     sln_path = os.path.join("packetWin7", "Dll", "Project", "Packet.sln")
-    default_options = "configuration=Release No NetMon and AirPcap"
+    default_options = "configuration=Release No NetMon and AirPcap", "winpcap_mode=False"
     options = {
+        "winpcap_mode": [True, False],
         "configuration": 
             [
                 "Release",
@@ -39,6 +40,9 @@ class NpcapDllConan(ConanFile):
         
         unzip_dir = "{0}-{1}".format(self.lib_parent_name, self.version)
         sln_path_full = os.path.join(unzip_dir, self.sln_path)
+        print(os.path.exists(r'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools'))
+        print(os.path.exists(r'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools\\../../VC/Auxiliary/Build'))
+        print(os.path.exists(r'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools\\../../VC/Auxiliary/Build/vcvarsall.bat'))
         build_command = tools.msvc_build_command(
             self.settings, 
             sln_path_full,  
