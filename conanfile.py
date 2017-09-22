@@ -3,7 +3,7 @@ from conans import ConanFile, tools, os
 
 class NpcapDllConan(ConanFile):
     name = "npcap-dll"
-    version = "0.93"
+    version = "0.94"
     license = "NPCAP License"
     url = "https://github.com/bincrafters/conan-npcap"
     source_url = "https://github.com/nmap/npcap"
@@ -34,15 +34,8 @@ class NpcapDllConan(ConanFile):
         tools.get("{0}/archive/v{1}.zip".format(self.source_url, self.version))
 
     def build(self):
-        os.environ["VisualStudioVersion"]="" 
-        # Above required to compile for VS14 from VS15
-        # which is currently blocked conan due to a precondition on vcvarsall.bat
-        
         unzip_dir = "{0}-{1}".format(self.lib_parent_name, self.version)
         sln_path_full = os.path.join(unzip_dir, self.sln_path)
-        print(os.path.exists(r'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools'))
-        print(os.path.exists(r'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools\\../../VC/Auxiliary/Build'))
-        print(os.path.exists(r'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools\\../../VC/Auxiliary/Build/vcvarsall.bat'))
         build_command = tools.msvc_build_command(
             self.settings, 
             sln_path_full,  
@@ -59,4 +52,4 @@ class NpcapDllConan(ConanFile):
         self.copy("*.dll", dst="bin", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = self.collect_libs()
+        self.cpp_info.libs = tools.collect_libs(self)
