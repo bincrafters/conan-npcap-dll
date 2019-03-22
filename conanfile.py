@@ -1,4 +1,6 @@
-from conans import ConanFile, tools, os
+# -*- coding: utf-8 -*-
+import os
+from conans import ConanFile, tools
 
 
 class NpcapDllConan(ConanFile):
@@ -13,7 +15,7 @@ class NpcapDllConan(ConanFile):
     default_options = "configuration=Release No NetMon and AirPcap", "winpcap_mode=False"
     options = {
         "winpcap_mode": [True, False],
-        "configuration": 
+        "configuration":
             [
                 "Release",
                 "Debug",
@@ -27,7 +29,7 @@ class NpcapDllConan(ConanFile):
                 "Release No NetMon LOG_TO_FILE",
                 "OEM Release No NetMon and AirPcap",
                 "OEM Release No NetMon and AirPcap(WinPcap Mode)"
-            ] 
+            ]
     }
 
     def source(self):
@@ -37,16 +39,16 @@ class NpcapDllConan(ConanFile):
         unzip_dir = "{0}-{1}".format(self.lib_parent_name, self.version)
         sln_path_full = os.path.join(unzip_dir, self.sln_path)
         build_command = tools.msvc_build_command(
-            self.settings, 
-            sln_path_full,  
+            self.settings,
+            sln_path_full,
             build_type=str('"' + str(self.options.configuration) + '"'))
-        
+
         if self.settings.arch == "x86":
             self.run(build_command.replace('"x86"', '"Win32"'))
         else:
             self.run(build_command)
-        
-        
+
+
     def package(self):
         self.copy("*.lib", dst="lib", keep_path=False)
         self.copy("*.dll", dst="bin", keep_path=False)
